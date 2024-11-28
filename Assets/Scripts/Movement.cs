@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,6 +8,7 @@ public class Movement : MonoBehaviour
     [SerializeField] InputAction thrust;
     [SerializeField] InputAction rotation;
     [SerializeField] float thrustStrength = 100f;
+    [SerializeField] float rotationStrength = 100f;
     Rigidbody rb;
 
     private void Start()
@@ -39,11 +41,16 @@ public class Movement : MonoBehaviour
         float rotationInput = rotation.ReadValue<float>();
         if(rotationInput < 0)
         {
-            transform.Rotate(Vector3.forward);
+            ApplyRotation(rotationStrength);
         }
         else if(rotationInput > 0)
         {
-            transform.Rotate(-Vector3.forward);
+            ApplyRotation(-rotationStrength);
+        }
+
+        void ApplyRotation(float rotationThisFrame)
+        {
+            transform.Rotate(Vector3.forward * rotationThisFrame * Time.fixedDeltaTime);
         }
     }
 }
