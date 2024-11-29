@@ -272,6 +272,8 @@ MonoBehaviour:
   levelLoadDelay: 2
   success: {fileID: 8300000, guid: 71c330fc888e9e44db9e21579cc930a2, type: 3}
   crash: {fileID: 8300000, guid: dee6cec04363cf947b727602056ea0be, type: 3}
+  successParticles: {fileID: 918029341906540121}
+  crashParticles: {fileID: 8495515415478339005}
 --- !u!1001 &1043941435628684615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -329,6 +331,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
+--- !u!198 &918029341906540121 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198631066050499358, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
+  m_PrefabInstance: {fileID: 1043941435628684615}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1040967740208826767 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4100699973242056, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
@@ -453,6 +460,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
+--- !u!198 &8495515415478339005 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198204746014789312, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
+  m_PrefabInstance: {fileID: 8585558985828141949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8586617635390817383 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4436899185823514, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
