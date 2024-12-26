@@ -80,12 +80,17 @@ public class CollisionHandler : MonoBehaviour
 
     void LoadNextLevel()
     {
+        
+
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         int nextScene = currentScene + 1;
         if (nextScene == SceneManager.sceneCountInBuildSettings)
         {
             nextScene = 0;
         }
+
+        ScoreManager.Instance.OnSceneTransition(nextScene);
+
         SceneManager.LoadScene(nextScene);
     }
 

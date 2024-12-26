@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\collisionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\collisionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|c:\\users\\xs\\projets_unity\\boost_rocket\\assets\\scripts\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\playeridmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|c:\\users\\xs\\projets_unity\\boost_rocket\\assets\\scripts\\playeridmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playeridmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\collisionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\collisionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5F4A4799-4249-1481-B330-709097EDCDE1}|Assembly-CSharp.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\movement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -35,19 +35,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ScoreManager.cs",
-              "DocumentMoniker": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\ScoreManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ScoreManager.cs",
-              "ToolTip": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\ScoreManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ScoreManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAowEMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-25T16:30:02.577Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "PlayerIDManager.cs",
               "DocumentMoniker": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\PlayerIDManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerIDManager.cs",
@@ -55,7 +42,21 @@
               "RelativeToolTip": "Assets\\Scripts\\PlayerIDManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T13:43:35.52Z"
+              "WhenOpened": "2024-12-26T13:43:35.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ScoreManager.cs",
+              "DocumentMoniker": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\ScoreManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ScoreManager.cs",
+              "ToolTip": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\ScoreManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ScoreManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T16:30:02.577Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -75,16 +76,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "CollisionHandler.cs",
               "DocumentMoniker": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\CollisionHandler.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CollisionHandler.cs",
               "ToolTip": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\CollisionHandler.cs",
               "RelativeToolTip": "Assets\\Scripts\\CollisionHandler.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAkwF0AAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAAAzwFAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T11:23:36.131Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-24T11:23:36.131Z"
             }
           ]
         }
