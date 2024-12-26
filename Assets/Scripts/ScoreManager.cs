@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using TMPro;  // For TextMeshPro
+using TMPro;  
 
 public class ScoreManager : MonoBehaviour
 {

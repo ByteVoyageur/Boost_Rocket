@@ -24,6 +24,7 @@
 
 # Visual Studio Code generated files
 .vscode/
+.vs/
 
 # Crash reports
 sysinfo.txt
