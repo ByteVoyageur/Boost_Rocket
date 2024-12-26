@@ -7,10 +7,10 @@ public class ScoreUploader : MonoBehaviour
     [Header("MongoDB Connection Info")]
     [SerializeField]
     private string mongoConnectionUri =
-        "mongodb+srv://username:password@clustername.mongodb.net/?retryWrites=true&w=majority&appName=BoostRocket";
+        "mongodb+srv://myUser:myPassword@xiaosong.yupunes.mongodb.net/BoostRocket?retryWrites=true&w=majority&appName=BoostRocket";
 
     [SerializeField] private string databaseName = "BoostRocket";
-    [SerializeField] private string collectionName = "Score";
+    [SerializeField] private string collectionName = "Store";
 
     private MongoClient client;
     private IMongoDatabase database;
@@ -20,7 +20,6 @@ public class ScoreUploader : MonoBehaviour
 
     private void Awake()
     {
-        // Optional: Make this GameObject persistent across scenes
         DontDestroyOnLoad(gameObject);
     }
 
@@ -29,25 +28,15 @@ public class ScoreUploader : MonoBehaviour
         InitializeMongoDB();
     }
 
-    /// <summary>
-    /// InitializeMongoDB is used to connect to the MongoDB Atlas database and retrieve the target collection.
-    /// </summary>
     private void InitializeMongoDB()
     {
         try
         {
-            // Create settings from connection string
             var settings = MongoClientSettings.FromConnectionString(mongoConnectionUri);
-            // Specify the ServerApi version
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
 
-            // Create MongoClient
             client = new MongoClient(settings);
-
-            // Get database
             database = client.GetDatabase(databaseName);
-
-            // Get collection
             scoreCollection = database.GetCollection<BsonDocument>(collectionName);
 
             isInitialized = true;
@@ -61,10 +50,9 @@ public class ScoreUploader : MonoBehaviour
     }
 
     /// <summary>
-    /// UploadScore is used to insert a new document into the Score collection.
+    /// UploadScore is used to upsert (update or insert) player's score 
+    /// under the same document in MongoDB based on the playerID.
     /// </summary>
-    /// <param name="playerID">The ID of the current player.</param>
-    /// <param name="currentScore">The player's total score.</param>
     public void UploadScore(string playerID, int currentScore)
     {
         if (!isInitialized)
@@ -75,15 +63,21 @@ public class ScoreUploader : MonoBehaviour
 
         try
         {
-            var doc = new BsonDocument
-            {
-                { "playerID", playerID },
-                { "score", currentScore },
-                { "timestamp", System.DateTime.UtcNow }
-            };
+            // Define a filter to find the existing document by playerID
+            var filter = Builders<BsonDocument>.Filter.Eq("playerID", playerID);
 
-            scoreCollection.InsertOne(doc);
-            Debug.Log($"Successfully uploaded score: playerID={playerID}, score={currentScore}");
+            // Build an update definition to set the score and timestamp
+            var update = Builders<BsonDocument>.Update
+                .Set("score", currentScore)         // Always store the latest total score
+                .Set("timestamp", System.DateTime.UtcNow);
+
+            // Use UpdateOptions with IsUpsert = true
+            var options = new UpdateOptions { IsUpsert = true };
+
+            // Perform the upsert operation
+            scoreCollection.UpdateOne(filter, update, options);
+
+            Debug.Log($"Successfully upserted score: playerID={playerID}, score={currentScore}");
         }
         catch (System.Exception ex)
         {
