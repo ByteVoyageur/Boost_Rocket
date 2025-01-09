@@ -27,7 +27,6 @@ public class ScoreFetcher : MonoBehaviour
 
     private void Awake()
     {
-        // Make sure this object will not be destroyed across scene loads
         DontDestroyOnLoad(gameObject);
     }
 
@@ -80,7 +79,6 @@ public class ScoreFetcher : MonoBehaviour
             // Sort by score desc
             var sort = Builders<BsonDocument>.Sort.Descending("score");
 
-            // We fetch potentially more than limit, in case we want to do custom sorting for ties
             var findOptions = new FindOptions<BsonDocument>
             {
                 Sort = sort,

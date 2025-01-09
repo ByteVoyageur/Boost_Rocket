@@ -11,10 +11,6 @@ public class MenuManager : MonoBehaviour
     public Button leaderBoardButton;
     public Button closeButton;
 
-    [Header("Leader Board")]
-    public LeaderBoardManager leaderBoardManager; 
-                                                  
-
     private bool isGamePaused = false;
 
 
@@ -33,9 +29,6 @@ public class MenuManager : MonoBehaviour
 
         if (playAgainButton != null)
             playAgainButton.onClick.AddListener(OnPlayAgainClicked);
-
-        if (leaderBoardButton != null)
-            leaderBoardButton.onClick.AddListener(OnLeaderBoardClicked);
 
         if (closeButton != null)
             closeButton.onClick.AddListener(OnCloseMenuClicked);
@@ -68,24 +61,7 @@ public class MenuManager : MonoBehaviour
     {
         // Unpause before changing scene
         Time.timeScale = 1f;
-        // Load your first scene (e.g. "Scene_0")
         SceneManager.LoadScene("Scene_0");
-    }
-
-    /// <summary>
-    /// Called when user clicks "Leader Board" button to show the ranking panel.
-    /// </summary>
-    private void OnLeaderBoardClicked()
-    {
-        // If you still have a separate LeaderBoardManager, just call ToggleLeaderBoard()
-        if (leaderBoardManager != null)
-        {
-            // Option 1: Open the LeaderBoard
-            leaderBoardManager.ToggleLeaderBoard();
-
-            // Option 2: Or directly call a ShowLeaderBoard() method
-            // leaderBoardManager.ShowLeaderBoard();
-        }
     }
 
     /// <summary>
