@@ -7,10 +7,11 @@ public class ScoreUploader : MonoBehaviour
     [Header("MongoDB Connection Info")]
     [SerializeField]
     private string mongoConnectionUri =
-        "mongodb+srv://myUser:myPassword@xiaosong.yupunes.mongodb.net/BoostRocket?retryWrites=true&w=majority&appName=BoostRocket";
+    "mongodb+srv://BoostRocket_admin:Stubborn0310@xiaosong.yupunes.mongodb.net/BoostRocket?retryWrites=true&w=majority&appName=BoostRocket&authMechanism=SCRAM-SHA-256";
+
 
     [SerializeField] private string databaseName = "BoostRocket";
-    [SerializeField] private string collectionName = "Store";
+    [SerializeField] private string collectionName = "Score";
 
     private MongoClient client;
     private IMongoDatabase database;

@@ -93,4 +93,11 @@ public class ScoreManager : MonoBehaviour
             scoreText.text = $"Score: {currentScore}";
         }
     }
+
+    public string GetCurrentPlayerID()
+    {
+        return playerID;
+    }
+
+
 }
