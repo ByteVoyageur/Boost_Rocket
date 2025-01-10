@@ -79,7 +79,7 @@ public class ScoreManager : MonoBehaviour
         // Upload to MongoDB Atlas if uploader is available
         if (uploader != null)
         {
-            uploader.UploadScore(playerID, currentScore);
+            uploader.UploadScore(currentScore);
         }
     }
 

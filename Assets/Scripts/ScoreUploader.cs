@@ -54,7 +54,7 @@ public class ScoreUploader : MonoBehaviour
     /// UploadScore is used to upsert (update or insert) player's score 
     /// under the same document in MongoDB based on the playerID.
     /// </summary>
-    public void UploadScore(string playerID, int currentScore)
+    public void UploadScore(int currentScore)
     {
         if (!isInitialized)
         {
@@ -64,18 +64,25 @@ public class ScoreUploader : MonoBehaviour
 
         try
         {
-            // Define a filter to find the existing document by playerID
-            var filter = Builders<BsonDocument>.Filter.Eq("playerID", playerID);
+            // Decide which ID to use
+            string playerID;
+            if (PlayerSession.IsLoggedIn)
+            {
+                // If the user logged in, get the ObjectId.ToString()
+                playerID = PlayerSession.CurrentUserId.ToString();
+            }
+            else
+            {
+                // If the user skipped, use device ID (or any fallback)
+                playerID = SystemInfo.deviceUniqueIdentifier;
+            }
 
-            // Build an update definition to set the score and timestamp
+            var filter = Builders<BsonDocument>.Filter.Eq("playerID", playerID);
             var update = Builders<BsonDocument>.Update
-                .Set("score", currentScore)         // Always store the latest total score
+                .Set("score", currentScore)
                 .Set("timestamp", System.DateTime.UtcNow);
 
-            // Use UpdateOptions with IsUpsert = true
             var options = new UpdateOptions { IsUpsert = true };
-
-            // Perform the upsert operation
             scoreCollection.UpdateOne(filter, update, options);
 
             Debug.Log($"Successfully upserted score: playerID={playerID}, score={currentScore}");
@@ -85,4 +92,6 @@ public class ScoreUploader : MonoBehaviour
             Debug.LogError($"Failed to upload score to MongoDB: {ex.Message}");
         }
     }
+
+
 }

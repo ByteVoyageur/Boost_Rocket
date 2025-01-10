@@ -13,8 +13,6 @@ public class MenuManager : MonoBehaviour
 
     private bool isGamePaused = false;
 
-
-
     void Start()
     {
         // Hide the menu panel at start

@@ -76,7 +76,6 @@ public class ScoreFetcher : MonoBehaviour
 
         try
         {
-            // Sort by score desc
             var sort = Builders<BsonDocument>.Sort.Descending("score");
 
             var findOptions = new FindOptions<BsonDocument>
@@ -85,11 +84,9 @@ public class ScoreFetcher : MonoBehaviour
                 Limit = limit * 3
             };
 
-            // Query (async)
             var cursor = await scoreCollection.FindAsync(new BsonDocument(), findOptions);
             var documents = await cursor.ToListAsync();
 
-            // Convert each BsonDocument to LeaderBoardData
             foreach (var doc in documents)
             {
                 LeaderBoardData data = new LeaderBoardData
@@ -101,7 +98,6 @@ public class ScoreFetcher : MonoBehaviour
                 result.Add(data);
             }
 
-            // Custom sorting for tie-breaking (current user first if same score)
             result.Sort((x, y) =>
             {
                 int compare = y.score.CompareTo(x.score);
@@ -114,7 +110,6 @@ public class ScoreFetcher : MonoBehaviour
                 return compare;
             });
 
-            // Trim to top 'limit'
             if (result.Count > limit)
             {
                 result = result.GetRange(0, limit);

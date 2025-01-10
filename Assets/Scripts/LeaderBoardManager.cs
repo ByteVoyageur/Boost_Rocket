@@ -5,30 +5,23 @@ using TMPro;
 
 public class LeaderBoardManager : MonoBehaviour
 {
-    [Header("Leaderboard UI")]
-    public GameObject leaderBoardPanel;  // The parent panel or container for the leaderboard
+    public GameObject leaderBoardPanel;  
 
-    [Header("Top 10 Ranks (fixed)")]
-    public TextMeshProUGUI[] rankTexts;  // Array of size 10, each referencing Rank01 ~ Rank10
+    public TextMeshProUGUI[] rankTexts;  
 
-    // Reference to ScoreFetcher
     public ScoreFetcher scoreFetcher;
 
-    // For identifying current player
     private string currentPlayerID = "";
 
-    // Internal state
     private bool isPanelVisible = false;
 
     void Start()
     {
-        // Hide leaderboard panel at start (optional)
         if (leaderBoardPanel != null)
         {
             leaderBoardPanel.SetActive(false);
         }
 
-        // If you have a ScoreFetcher in the scene or via Inspector
         if (scoreFetcher == null)
         {
             scoreFetcher = FindObjectOfType<ScoreFetcher>();
@@ -38,10 +31,8 @@ public class LeaderBoardManager : MonoBehaviour
             }
         }
 
-        // Get current player ID from ScoreManager if needed
         if (ScoreManager.Instance != null)
         {
-            // Suppose you have a method GetCurrentPlayerID() or PlayerID property
             currentPlayerID = ScoreManager.Instance.GetCurrentPlayerID();
         }
     }
@@ -87,7 +78,6 @@ public class LeaderBoardManager : MonoBehaviour
         {
             if (i < topScores.Count)
             {
-                // i-th data
                 LeaderBoardData data = topScores[i];
                 rankTexts[i].text = $"{i + 1}. {data.username}  {data.score}";
 
