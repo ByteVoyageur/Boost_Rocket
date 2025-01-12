@@ -92,6 +92,4 @@ public class ScoreUploader : MonoBehaviour
             Debug.LogError($"Failed to upload score to MongoDB: {ex.Message}");
         }
     }
-
-
 }

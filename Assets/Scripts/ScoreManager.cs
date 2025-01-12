@@ -19,6 +19,9 @@ public class ScoreManager : MonoBehaviour
     // Reference to ScoreUploader
     private ScoreUploader uploader;
 
+    private float startTime;
+    private bool isTimerRunning;
+
     private void Awake()
     {
         // Implement singleton pattern
@@ -99,5 +102,41 @@ public class ScoreManager : MonoBehaviour
         return playerID;
     }
 
+    /// <summary>
+    /// StartTimer initializes the startTime and begins timing.
+    /// </summary>
+    public void StartTimer()
+    {
+        startTime = Time.time;
+        isTimerRunning = true;
+        Debug.Log("Timer started.");
+    }
 
+    /// <summary>
+    /// StopTimerAndAddScore stops the timer, calculates time-based score, and adds it to total score.
+    /// </summary>
+    
+    public void StopTimerAndAddScore()
+    {
+        if (!isTimerRunning) return;
+
+        float endTime = Time.time;
+        float deltaTime = endTime - startTime;
+        isTimerRunning = false;
+
+        int timeScore = Mathf.Max(0, 1000 - Mathf.RoundToInt(deltaTime * 10));
+
+        Debug.Log($"Time-based score = {timeScore}, deltaTime = {deltaTime}");
+        AddScore(timeScore);
+    }
+
+    /// <summary>
+    /// ResetTimer can be called when the player crashes or you need to discard current timing.
+    /// </summary>
+    public void ResetTimer()
+    {
+        isTimerRunning = false;
+        startTime = 0f;
+        Debug.Log("Timer reset.");
+    }
 }

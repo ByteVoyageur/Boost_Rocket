@@ -1,14 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 
 public class LeaderBoardManager : MonoBehaviour
 {
-    public GameObject leaderBoardPanel;  
-
-    public TextMeshProUGUI[] rankTexts;  
-
+    public GameObject leaderBoardPanel;
+    public GameObject entryPrefab;      
+    public Transform contentParent;     
     public ScoreFetcher scoreFetcher;
 
     private string currentPlayerID = "";
@@ -17,24 +16,8 @@ public class LeaderBoardManager : MonoBehaviour
 
     void Start()
     {
-        if (leaderBoardPanel != null)
-        {
             leaderBoardPanel.SetActive(false);
-        }
-
-        if (scoreFetcher == null)
-        {
-            scoreFetcher = FindObjectOfType<ScoreFetcher>();
-            if (scoreFetcher == null)
-            {
-                Debug.LogWarning("ScoreFetcher not found in the scene. LeaderBoardManager cannot retrieve scores.");
-            }
-        }
-
-        if (ScoreManager.Instance != null)
-        {
             currentPlayerID = ScoreManager.Instance.GetCurrentPlayerID();
-        }
     }
 
     /// <summary>
@@ -45,8 +28,7 @@ public class LeaderBoardManager : MonoBehaviour
         if (!isPanelVisible)
         {
             RefreshLeaderBoard();
-            if (leaderBoardPanel != null)
-                leaderBoardPanel.SetActive(true);
+            leaderBoardPanel.SetActive(true);
 
             isPanelVisible = true;
         }
@@ -60,43 +42,33 @@ public class LeaderBoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Pull top 10 from database and display in the rankTexts array.
+    /// Pull top scores from database and display in the ScrollView.
     /// </summary>
     private async void RefreshLeaderBoard()
     {
-        if (scoreFetcher == null)
+        foreach (Transform child in contentParent)
         {
-            Debug.LogWarning("No ScoreFetcher available. Cannot retrieve top scores.");
-            return;
+            Destroy(child.gameObject);
         }
+        Debug.Log("Cleared previous leaderboard entries.");
 
-        // 1) Get top 10 from DB
         List<LeaderBoardData> topScores = await scoreFetcher.GetTopScores(10, currentPlayerID);
+        Debug.Log($"Retrieved {topScores.Count} top scores from database.");
 
-        // 2) Loop through rankTexts to fill them
-        for (int i = 0; i < rankTexts.Length; i++)
+        foreach (LeaderBoardData data in topScores)
         {
-            if (i < topScores.Count)
-            {
-                LeaderBoardData data = topScores[i];
-                rankTexts[i].text = $"{i + 1}. {data.username}  {data.score}";
+            GameObject entryGO = Instantiate(entryPrefab, contentParent);
+            Debug.Log("Instantiated a leaderboard entry prefab.");
 
-                // Highlight if current player
-                if (data.userId == currentPlayerID)
-                    rankTexts[i].color = Color.yellow;
-                else
-                    rankTexts[i].color = Color.white;
-            }
-            else
+            TextMeshProUGUI[] textFields = entryGO.GetComponentsInChildren<TextMeshProUGUI>();
+
+            if (textFields.Length >= 3)
             {
-                // If no more data, show placeholder or blank
-                rankTexts[i].text = $"---";
-                rankTexts[i].color = Color.white;
+                textFields[0].text = data.username;
+                textFields[1].text = data.score.ToString();
+                textFields[2].text = data.timestamp.ToLocalTime().ToString("dd-MM-yyyy");
             }
         }
-    }
 
-    /// <summary>
-    /// Called when "Exit Game" button is clicked.
-    /// </summary>
+    }
 }

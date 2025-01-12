@@ -12,7 +12,6 @@ public class UserAuthUI : MonoBehaviour
     [SerializeField] private TMP_Text feedbackText;
     [SerializeField] private GameObject loginPanel;
 
-
     private MongoClient client;
     private IMongoDatabase database;
     private IMongoCollection<BsonDocument> userCollection;
@@ -20,12 +19,23 @@ public class UserAuthUI : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log($"[UserAuthUI] PlayerSession.IsLoggedIn: {PlayerSession.IsLoggedIn}");
+
         InitializeMongoDB();
+
+        // Check if user is already logged in
+        if (PlayerSession.IsLoggedIn)
+        {
+            // Hide login panel if user is already logged in
+            loginPanel.SetActive(false);
+        }
+        else
+        {
+            // Otherwise, show the login panel
+            loginPanel.SetActive(true);
+        }
     }
 
-    /// <summary>
-    /// Initialize the MongoDB client and get collections
-    /// </summary>
     private void InitializeMongoDB()
     {
         var settings = MongoClientSettings.FromConnectionString(
@@ -40,9 +50,6 @@ public class UserAuthUI : MonoBehaviour
         scoreCollection = database.GetCollection<BsonDocument>("Score");
     }
 
-    /// <summary>
-    /// Called when "Register" button is clicked
-    /// </summary>
     public void OnRegisterButtonClicked()
     {
         string inputUsername = usernameField.text;
@@ -54,7 +61,6 @@ public class UserAuthUI : MonoBehaviour
 
         if (existing != null)
         {
-            Debug.Log("Username already taken");
             feedbackText.text = "Username already taken. Try another name.";
             feedbackText.gameObject.SetActive(true);
             return;
@@ -63,72 +69,57 @@ public class UserAuthUI : MonoBehaviour
         // 2) Create a new user document
         string passwordHash = BCrypt.Net.BCrypt.HashPassword(inputPassword);
         var userDoc = new BsonDocument
-    {
-        { "username", inputUsername },
-        { "passwordHash", passwordHash },
-        { "createdAt", System.DateTime.UtcNow }
-    };
+        {
+            { "username", inputUsername },
+            { "passwordHash", passwordHash },
+            { "createdAt", System.DateTime.UtcNow }
+        };
         userCollection.InsertOne(userDoc);
 
         var userId = userDoc["_id"].AsObjectId;
-        Debug.Log("User registered with id: " + userId);
-        feedbackText.text = "Register success! Welcome, " + inputUsername;
+        PlayerSession.SetLoggedIn(userId, inputUsername);
 
-        // 3) Save the current user data in PlayerSession
-        PlayerSession.CurrentUserId = userId;
-        PlayerSession.CurrentUsername = inputUsername;
-        PlayerSession.IsLoggedIn = true;
-
+        // Hide the panel
         loginPanel.SetActive(false);
-
     }
 
-
-
-    /// <summary>
-    /// Called when "Login" button is clicked
-    /// </summary>
     public void OnLoginButtonClicked()
     {
         string inputUsername = usernameField.text;
         string inputPassword = passwordField.text;
 
-        // Find user by username
         var filter = Builders<BsonDocument>.Filter.Eq("username", inputUsername);
         var userDoc = userCollection.Find(filter).FirstOrDefault();
 
         if (userDoc == null)
         {
-            Debug.Log("User does not exist.");
+            feedbackText.text = "User does not exist.";
+            feedbackText.gameObject.SetActive(true);
             return;
         }
 
-        // Compare password
         string storedHash = userDoc["passwordHash"].AsString;
         bool isMatch = BCrypt.Net.BCrypt.Verify(inputPassword, storedHash);
 
         if (!isMatch)
         {
-            Debug.Log("Wrong password.");
+            feedbackText.text = "Wrong password.";
+            feedbackText.gameObject.SetActive(true);
             return;
         }
 
         // Login success
         ObjectId userId = userDoc["_id"].AsObjectId;
-        Debug.Log("Login success. userId: " + userId);
+        PlayerSession.SetLoggedIn(userId, inputUsername);
 
-        PlayerSession.CurrentUserId = userId;
         loginPanel.SetActive(false);
     }
 
-    /// <summary>
-    /// Called when "Skip" button is clicked
-    /// </summary>
     public void OnSkipButtonClicked()
     {
-        // The user does not want to register or log in,
-        // fallback to device ID or something else
-        PlayerSession.CurrentUserId = ObjectId.Empty; // or keep a device ID-based system
+        // If user wants to skip login/registration
+        PlayerSession.SetLoggedOut();
+        // or set up DeviceID-based logic
         loginPanel.SetActive(false);
     }
 }

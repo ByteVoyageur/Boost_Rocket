@@ -23,7 +23,7 @@ public class CollisionHandler : MonoBehaviour
 
     private void Update()
     {
-        RespondToDebugKeys();
+        //RespondToDebugKeys();
     }
 
     private void RespondToDebugKeys()
@@ -65,6 +65,7 @@ public class CollisionHandler : MonoBehaviour
         audioSource.PlayOneShot(success);
         successParticles.Play();
         GetComponent<Movement>().enabled = false;
+        ScoreManager.Instance.StopTimerAndAddScore();
         Invoke("LoadNextLevel", levelLoadDelay);
     }
 
@@ -75,6 +76,7 @@ public class CollisionHandler : MonoBehaviour
         audioSource.PlayOneShot(crash);
         crashParticles.Play();
         GetComponent<Movement>().enabled = false;
+        ScoreManager.Instance.ResetTimer();
         Invoke("ReloadLevel", levelLoadDelay);
     }
 

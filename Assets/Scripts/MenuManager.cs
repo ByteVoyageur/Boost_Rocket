@@ -4,12 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [Header("Menu References")]
     public GameObject menuPanel;         
-    public Button exitGameButton;
     public Button playAgainButton;
     public Button leaderBoardButton;
     public Button closeButton;
+    public GameObject leaderBoardContainer;
 
     private bool isGamePaused = false;
 
@@ -20,10 +19,6 @@ public class MenuManager : MonoBehaviour
         {
             menuPanel.SetActive(false);
         }
-
-        // Bind buttons
-        if (exitGameButton != null)
-            exitGameButton.onClick.AddListener(OnExitGameClicked);
 
         if (playAgainButton != null)
             playAgainButton.onClick.AddListener(OnPlayAgainClicked);
@@ -50,6 +45,7 @@ public class MenuManager : MonoBehaviour
         isGamePaused = false;
         Time.timeScale = 1f; // Unpause the game
         menuPanel.SetActive(false);
+        leaderBoardContainer.SetActive(false);
     }
 
     /// <summary>
@@ -60,17 +56,5 @@ public class MenuManager : MonoBehaviour
         // Unpause before changing scene
         Time.timeScale = 1f;
         SceneManager.LoadScene("Scene_0");
-    }
-
-    /// <summary>
-    /// Called when user clicks "Exit Game" button.
-    /// </summary>
-    private void OnExitGameClicked()
-    {
-        // In Desktop platforms, it will quit
-        Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
     }
 }
