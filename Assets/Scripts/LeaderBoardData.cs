@@ -7,7 +7,7 @@ using System;
 public class LeaderBoardData
 {
     public string userId;       // The player's ID (MongoDB _id in the Users or deviceID)
-    public string username;     // The player's username from Users collection
-    public int score;           // Score
+    public string username;     
+    public int score;           
     public DateTime timestamp;  // When this score was updated
 }

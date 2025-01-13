@@ -1439,11 +1439,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -91.49997
+      value: -91.49998
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 91.499985
+      value: 91.500015
       objectReference: {fileID: 0}
     - target: {fileID: 8600642053931010767, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1899,6 +1899,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 327337802409551590, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: onHoldClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8024846240597582337}
+    - target: {fileID: 327337802409551590, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: onHoldClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RotateLeft
+      objectReference: {fileID: 0}
     - target: {fileID: 3578552361764490119, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
       propertyPath: leaderBoardContainer
       value: 
@@ -1914,6 +1922,22 @@ PrefabInstance:
     - target: {fileID: 5526493336299757930, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
       propertyPath: m_Name
       value: MenuManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878933185663325565, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: onHoldClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8024846240597582337}
+    - target: {fileID: 5878933185663325565, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: onHoldClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RotateRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453070391091753969, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: onHoldClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8024846240597582337}
+    - target: {fileID: 8453070391091753969, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: onHoldClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartThrusting
       objectReference: {fileID: 0}
     - target: {fileID: 9147424080459465465, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3718,8 +3742,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4166187558849999131, guid: 7e422cbddc9e6be42966526088cf3087, type: 3}
+      propertyPath: thrustStrength
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166187558849999131, guid: 7e422cbddc9e6be42966526088cf3087, type: 3}
       propertyPath: rotationStrength
-      value: 190
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7466672201379528351, guid: 7e422cbddc9e6be42966526088cf3087, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3770,6 +3798,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e422cbddc9e6be42966526088cf3087, type: 3}
+--- !u!114 &8024846240597582337 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4166187558849999131, guid: 7e422cbddc9e6be42966526088cf3087, type: 3}
+  m_PrefabInstance: {fileID: 8024846240597582336}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cd91f7384cb83449049e9b40dd14b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9175452364790515992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3835,12 +3874,12 @@ SceneRoots:
   - {fileID: 854561601}
   - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 1867432203}
+  - {fileID: 1559073941}
   - {fileID: 4554339080384276856}
   - {fileID: 9175452364790515992}
   - {fileID: 8024846240597582336}
   - {fileID: 1391428346}
-  - {fileID: 1559073941}
-  - {fileID: 1867432203}
   - {fileID: 1026419458}
   - {fileID: 572512961}
   - {fileID: 1223282905}

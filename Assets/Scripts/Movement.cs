@@ -30,7 +30,6 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        // Handle keyboard input
         HandleKeyboardInput();
     }
 
