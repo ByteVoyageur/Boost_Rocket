@@ -16,12 +16,12 @@ public class ScoreFetcher : MonoBehaviour
     "mongodb+srv://BoostRocket_admin:Stubborn0310@xiaosong.yupunes.mongodb.net/BoostRocket?retryWrites=true&w=majority&appName=BoostRocket";
 
     [SerializeField] private string databaseName = "BoostRocket";
-    [SerializeField] private string collectionName = "Score";  // Score collection name
+    [SerializeField] private string collectionName = "Score";  
 
     private MongoClient client;
     private IMongoDatabase database;
     private IMongoCollection<BsonDocument> scoreCollection;
-    private IMongoCollection<BsonDocument> usersCollection; // NEW: reference to "Users" collection
+    private IMongoCollection<BsonDocument> usersCollection; 
 
     private bool isInitialized = false;
 

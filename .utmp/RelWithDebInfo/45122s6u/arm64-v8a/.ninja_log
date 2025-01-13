@@ -1,0 +1,10 @@
+# ninja log v5
+66	1537	7584009037292143	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	61f94174ca940c4c
+92	1547	7584009037000439	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	6d38da9e652aeb46
+105	1722	7584009039060267	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	1efbab98d41c94d6
+168	1735	7584009039276431	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	ca56d1a895c2944d
+0	1765	7584009039563484	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	bbfffb63366ddab6
+135	1968	7584009041596229	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	f265652b5d526a39
+188	1972	7584009041662375	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	ba02fd21a8ad347b
+15	2062	7584009042516356	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	5cc07fff2083f0ea
+2063	2278	7584009044716028	C:/Users/xs/Projets_Unity/Boost_Rocket/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/45122s6u/obj/arm64-v8a/libgame.so	5876c9eb608825b7

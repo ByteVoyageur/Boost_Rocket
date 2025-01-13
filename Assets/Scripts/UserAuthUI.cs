@@ -79,7 +79,6 @@ public class UserAuthUI : MonoBehaviour
         var userId = userDoc["_id"].AsObjectId;
         PlayerSession.SetLoggedIn(userId, inputUsername);
 
-        // Hide the panel
         loginPanel.SetActive(false);
     }
 

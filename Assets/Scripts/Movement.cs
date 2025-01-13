@@ -1,23 +1,25 @@
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] InputAction thrust;
-    [SerializeField] InputAction rotation;
-    [SerializeField] float thrustStrength = 100f;
-    [SerializeField] float rotationStrength = 100f;
-    [SerializeField] AudioClip mainEngineSFX;
-    [SerializeField] ParticleSystem mainEngineParticles;
-    [SerializeField] ParticleSystem rightThrustParticles;
-    [SerializeField] ParticleSystem leftThrustParticles;
+    [Header("Movement Settings")]
+    [SerializeField] private float thrustStrength = 100f;
+    [SerializeField] private float rotationStrength = 100f;
 
-    Rigidbody rb;
-    AudioSource audioSource;
+    [Header("Audio & Particles")]
+    [SerializeField] private AudioClip mainEngineSFX;
+    [SerializeField] private ParticleSystem mainEngineParticles;
+    [SerializeField] private ParticleSystem rightThrustParticles;
+    [SerializeField] private ParticleSystem leftThrustParticles;
 
-    // This bool will help us ensure the timer only starts once.
+    private Rigidbody rb;
+    private AudioSource audioSource;
+
+    // Control variables for input
+    private bool isThrusting = false;
+    private bool isRotatingLeft = false;
+    private bool isRotatingRight = false;
+
     private bool hasStarted = false;
 
     private void Start()
@@ -26,46 +28,81 @@ public class Movement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        thrust.Enable();
-        rotation.Enable();
+        // Handle keyboard input
+        HandleKeyboardInput();
     }
 
     private void FixedUpdate()
     {
-        ProcessThrust();
-        ProcessRotation();
-    }
-
-    private void ProcessThrust()
-    {
-        // If the thrust button is currently pressed
-        if (thrust.IsPressed())
+        if (isThrusting)
         {
-            // If we haven't started yet, start timer once
-            if (!hasStarted)
-            {
-                hasStarted = true;
-                // Start the timer for scoring
-                ScoreManager.Instance.StartTimer();
-            }
-
             StartThrusting();
         }
         else
         {
             StopThrusting();
         }
+
+        if (isRotatingLeft)
+        {
+            RotateLeft();
+        }
+        else if (isRotatingRight)
+        {
+            RotateRight();
+        }
+        else
+        {
+            StopRotating();
+        }
     }
 
-    private void StartThrusting()
+    private void HandleKeyboardInput()
     {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            isThrusting = true;
+        }
+        else
+        {
+            isThrusting = false;
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            isRotatingLeft = true;
+            isRotatingRight = false;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            isRotatingRight = true;
+            isRotatingLeft = false;
+        }
+        else
+        {
+            isRotatingLeft = false;
+            isRotatingRight = false;
+        }
+    }
+
+    public void StartThrusting()
+    {
+        if (!hasStarted)
+        {
+            hasStarted = true;
+            // Example: Start scoring or timer
+            ScoreManager.Instance.StartTimer();
+        }
+
         rb.AddRelativeForce(Vector3.up * thrustStrength * Time.fixedDeltaTime);
+
         if (!audioSource.isPlaying)
         {
             audioSource.PlayOneShot(mainEngineSFX);
         }
+
         if (!mainEngineParticles.isPlaying)
         {
             mainEngineParticles.Play();
@@ -78,47 +115,23 @@ public class Movement : MonoBehaviour
         mainEngineParticles.Stop();
     }
 
-    private void ProcessRotation()
+    public void RotateLeft()
     {
-        float rotationInput = rotation.ReadValue<float>();
-        if (rotationInput < 0)
+        ApplyRotation(rotationStrength);
+        if (!leftThrustParticles.isPlaying)
         {
-            RotateRight();
+            rightThrustParticles.Stop();
+            leftThrustParticles.Play();
         }
-        else if (rotationInput > 0)
-        {
-            RotateLeft();
-        }
-        else
-        {
-            StopRotating();
-        }
+    }
 
-        void ApplyRotation(float rotationThisFrame)
+    public void RotateRight()
+    {
+        ApplyRotation(-rotationStrength);
+        if (!rightThrustParticles.isPlaying)
         {
-            rb.freezeRotation = true;
-            transform.Rotate(Vector3.forward * rotationThisFrame * Time.fixedDeltaTime);
-            rb.freezeRotation = false;
-        }
-
-        void RotateRight()
-        {
-            ApplyRotation(rotationStrength);
-            if (!rightThrustParticles.isPlaying)
-            {
-                leftThrustParticles.Stop();
-                rightThrustParticles.Play();
-            }
-        }
-
-        void RotateLeft()
-        {
-            ApplyRotation(-rotationStrength);
-            if (!leftThrustParticles.isPlaying)
-            {
-                rightThrustParticles.Stop();
-                leftThrustParticles.Play();
-            }
+            leftThrustParticles.Stop();
+            rightThrustParticles.Play();
         }
     }
 
@@ -126,5 +139,12 @@ public class Movement : MonoBehaviour
     {
         rightThrustParticles.Stop();
         leftThrustParticles.Stop();
+    }
+
+    private void ApplyRotation(float rotationThisFrame)
+    {
+        rb.freezeRotation = true; // Disable physics-driven rotation
+        transform.Rotate(Vector3.forward * rotationThisFrame * Time.fixedDeltaTime);
+        rb.freezeRotation = false; // Re-enable physics-driven rotation
     }
 }

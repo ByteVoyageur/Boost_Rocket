@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fff9385c9ee359a4dae052c7f4c99262
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 179534
+  packageName: Better Buttons for Character Movement | Android & IOS
+  packageVersion: 1.0
+  assetPath: Assets/BetterButtonsForMobile/DemoScene/DemoScene_Player.cs
+  uploadId: 392292
