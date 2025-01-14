@@ -64,11 +64,34 @@ public class LeaderBoardManager : MonoBehaviour
 
             if (textFields.Length >= 3)
             {
-                textFields[0].text = data.username;
+                textFields[0].text = TrimUsername(data.username);
                 textFields[1].text = data.score.ToString();
                 textFields[2].text = data.timestamp.ToLocalTime().ToString("dd-MM-yyyy");
+
+                if (data.userId == currentPlayerID)
+                {
+                    HighlightCurrentUser(entryGO);
+                }
             }
         }
-
     }
+
+    private string TrimUsername(string username, int maxLength = 12)
+    {
+        if (username.Length > maxLength)
+        {
+            return username.Substring(0, maxLength) + "...";
+        }
+        return username;
+    }
+
+    private void HighlightCurrentUser(GameObject entryGO)
+    {
+        TextMeshProUGUI[] textFields = entryGO.GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (var text in textFields)
+        {
+            text.color = Color.yellow;
+        }
+    }
+
 }
