@@ -2368,11 +2368,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -91.49953
+      value: -91.49951
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 91.49956
+      value: 91.49954
       objectReference: {fileID: 0}
     - target: {fileID: 8600642053931010767, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3275,11 +3275,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4166187558849999131, guid: 7e422cbddc9e6be42966526088cf3087, type: 3}
       propertyPath: thrustStrength
-      value: 400
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4166187558849999131, guid: 7e422cbddc9e6be42966526088cf3087, type: 3}
       propertyPath: rotationStrength
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7466672201379528351, guid: 7e422cbddc9e6be42966526088cf3087, type: 3}
       propertyPath: m_LocalPosition.x
