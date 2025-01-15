@@ -1,12 +1,12 @@
-// APIClient.cs
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 
 public class APIClient
 {
-    private const string API_BASE_URL = "https://localhost:7233/api"; 
+    public const string API_BASE_URL = "https://localhost:7233/api"; 
 
     public static async Task<UserResponse> Login(string username, string password)
     {
@@ -120,6 +120,41 @@ public class APIClient
                 }
                 return false;
             }
+        }
+    }
+
+    public static async Task<List<LeaderBoardData>> GetLeaderboard(
+    string sortBy = "score",
+    string sortOrder = "desc",
+    int limit = 10,
+    string currentUserId = null)
+    {
+        try
+        {
+            string url = $"{API_BASE_URL}/leaderboard?sortBy={sortBy}&sortOrder={sortOrder}&limit={limit}&currentUserId={currentUserId}";
+
+            using (var request = UnityWebRequest.Get(url))
+            {
+                var operation = request.SendWebRequest();
+                while (!operation.isDone)
+                {
+                    await Task.Yield();
+                }
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    throw new Exception($"Failed to get leaderboard: {request.error}");
+                }
+
+                var json = request.downloadHandler.text;
+                var wrapper = JsonUtility.FromJson<LeaderBoardResponse>("{\"items\":" + json + "}");
+                return new List<LeaderBoardData>(wrapper.items);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error getting leaderboard: {ex.Message}");
+            throw;
         }
     }
 }
