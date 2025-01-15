@@ -8,10 +8,10 @@ public class Movement : MonoBehaviour
     [Header("Platform Specific Settings")]
     [SerializeField] private float pcThrustStrength = 3000f;
     [SerializeField] private float pcRotationStrength = 100f;
-    [SerializeField] private float androidThrustStrength = 400f;
-    [SerializeField] private float androidRotationStrength = 10f;
-    [SerializeField] private float iosThrustStrength = 400f;
-    [SerializeField] private float iosRotationStrength = 10f;
+    [SerializeField] private float androidThrustStrength = 3000f;
+    [SerializeField] private float androidRotationStrength = 100f;
+    [SerializeField] private float iosThrustStrength = 3000f;
+    [SerializeField] private float iosRotationStrength = 100f;
 
     [Header("Audio & Particles")]
     [SerializeField] private AudioClip mainEngineSFX;

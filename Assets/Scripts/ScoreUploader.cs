@@ -1,95 +1,89 @@
 using UnityEngine;
-using MongoDB.Driver;
-using MongoDB.Bson;
+using System;
+using System.Threading.Tasks;
 
 public class ScoreUploader : MonoBehaviour
 {
-    [Header("MongoDB Connection Info")]
-    [SerializeField]
-    private string mongoConnectionUri =
-    "mongodb+srv://BoostRocket_admin:Stubborn0310@xiaosong.yupunes.mongodb.net/BoostRocket?retryWrites=true&w=majority&appName=BoostRocket&authMechanism=SCRAM-SHA-256";
-
-
-    [SerializeField] private string databaseName = "BoostRocket";
-    [SerializeField] private string collectionName = "Score";
-
-    private MongoClient client;
-    private IMongoDatabase database;
-    private IMongoCollection<BsonDocument> scoreCollection;
-
-    private bool isInitialized = false;
+    private static ScoreUploader instance;
+    public static ScoreUploader Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<ScoreUploader>();
+            }
+            return instance;
+        }
+    }
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-    }
-
-    private void Start()
-    {
-        InitializeMongoDB();
-    }
-
-    private void InitializeMongoDB()
-    {
-        try
+        if (instance == null)
         {
-            var settings = MongoClientSettings.FromConnectionString(mongoConnectionUri);
-            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-
-            client = new MongoClient(settings);
-            database = client.GetDatabase(databaseName);
-            scoreCollection = database.GetCollection<BsonDocument>(collectionName);
-
-            isInitialized = true;
-            Debug.Log("MongoDB initialization succeeded.");
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        catch (System.Exception ex)
+        else
         {
-            isInitialized = false;
-            Debug.LogError($"MongoDB initialization failed: {ex.Message}");
+            Destroy(gameObject);
         }
     }
 
     /// <summary>
-    /// UploadScore is used to upsert (update or insert) player's score 
-    /// under the same document in MongoDB based on the playerID.
+    /// UploadScore is used to update or insert player's score through the API
     /// </summary>
-    public void UploadScore(int currentScore)
+    public async void UploadScore(int currentScore)
     {
-        if (!isInitialized)
-        {
-            Debug.LogWarning("MongoDB is not initialized. Cannot upload score.");
-            return;
-        }
-
         try
         {
             // Decide which ID to use
-            string playerID;
+            string playerId;
             if (PlayerSession.IsLoggedIn)
             {
-                // If the user logged in, get the ObjectId.ToString()
-                playerID = PlayerSession.CurrentUserId.ToString();
+                // If the user logged in, use their user ID
+                playerId = PlayerSession.CurrentUserId;
             }
             else
             {
-                // If the user skipped, use device ID (or any fallback)
-                playerID = SystemInfo.deviceUniqueIdentifier;
+                // If the user skipped, use device ID
+                playerId = SystemInfo.deviceUniqueIdentifier;
             }
 
-            var filter = Builders<BsonDocument>.Filter.Eq("playerID", playerID);
-            var update = Builders<BsonDocument>.Update
-                .Set("score", currentScore)
-                .Set("timestamp", System.DateTime.UtcNow);
+            bool success = await APIClient.UploadScore(playerId, currentScore);
 
-            var options = new UpdateOptions { IsUpsert = true };
-            scoreCollection.UpdateOne(filter, update, options);
-
-            Debug.Log($"Successfully upserted score: playerID={playerID}, score={currentScore}");
+            if (success)
+            {
+                Debug.Log($"Successfully uploaded score: playerId={playerId}, score={currentScore}");
+            }
+            else
+            {
+                Debug.LogWarning("Score upload completed but may not have succeeded");
+            }
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
-            Debug.LogError($"Failed to upload score to MongoDB: {ex.Message}");
+            Debug.LogError($"Failed to upload score: {ex.Message}");
+        }
+    }
+
+    private async void UploadScoreWithRetry(int currentScore, int maxRetries = 3)
+    {
+        for (int i = 0; i < maxRetries; i++)
+        {
+            try
+            {
+                await Task.Delay(i * 1000); 
+                UploadScore(currentScore);
+                return;
+            }
+            catch (Exception ex)
+            {
+                if (i == maxRetries - 1)
+                {
+                    Debug.LogError($"Failed to upload score after {maxRetries} attempts: {ex.Message}");
+                }
+            }
         }
     }
 }

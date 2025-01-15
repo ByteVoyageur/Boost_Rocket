@@ -13,7 +13,7 @@ public class ScoreFetcher : MonoBehaviour
     [Header("MongoDB Connection Info")]
     [SerializeField]
     private string mongoConnectionUri =
-    "mongodb+srv://BoostRocket_admin:Stubborn0310@xiaosong.yupunes.mongodb.net/BoostRocket?retryWrites=true&w=majority&appName=BoostRocket";
+     "mongodb://BoostRocket_admin:Stubborn0310@ac-fqlclex-shard-00-01.yupunes.mongodb.net:27017,ac-fqlclex-shard-00-00.yupunes.mongodb.net:27017,ac-fqlclex-shard-00-02.yupunes.mongodb.net:27017/BoostRocket?authSource=admin&replicaSet=atlas-3i2z3n-shard-0&retryWrites=true&w=majority&tls=true&appName=BoostRocket";
 
     [SerializeField] private string databaseName = "BoostRocket";
     [SerializeField] private string collectionName = "Score";  
@@ -88,7 +88,7 @@ public class ScoreFetcher : MonoBehaviour
             var findOptions = new FindOptions<BsonDocument>
             {
                 Sort = sort,
-                Limit = limit * 3 // we fetch more to handle tie or further sorting
+                Limit = limit * 3 
             };
 
             // Query the Score collection

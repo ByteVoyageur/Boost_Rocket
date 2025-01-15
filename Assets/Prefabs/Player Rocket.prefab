@@ -346,66 +346,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cd91f7384cb83449049e9b40dd14b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust:
-    m_Name: Thrust
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b42d0fe6-cffd-4600-9048-02a5582be9af
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 8c81a9cc-8377-4e58-bb8a-7c9d5ec9bbb7
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Thrust
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 9bf65abf-5412-4fbf-8376-b442cacabe3b
-      m_Path: <Gamepad>/rightTrigger
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Thrust
-      m_Flags: 0
-    m_Flags: 0
-  rotation:
-    m_Name: Rotation
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: bd3a8acf-931f-485d-8d3c-4f36e401b911
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 1D Axis
-      m_Id: c68a2cd7-3012-4458-a4e4-3774ecd57b29
-      m_Path: 1DAxis
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Rotation
-      m_Flags: 4
-    - m_Name: negative
-      m_Id: 77d61827-ea80-4567-991d-4c9abfdae25f
-      m_Path: <Keyboard>/leftArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Rotation
-      m_Flags: 8
-    - m_Name: positive
-      m_Id: d1c890a9-4239-4708-afe9-e841bcaa89f3
-      m_Path: <Keyboard>/rightArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Rotation
-      m_Flags: 8
-    m_Flags: 0
   thrustStrength: 3000
-  rotationStrength: 190
+  rotationStrength: 100
+  pcThrustStrength: 3000
+  pcRotationStrength: 100
+  androidThrustStrength: 3000
+  androidRotationStrength: 100
+  iosThrustStrength: 3000
+  iosRotationStrength: 100
   mainEngineSFX: {fileID: 8300000, guid: 374d7783b053d0e4493d7d0ccadfa1a1, type: 3}
   mainEngineParticles: {fileID: 8964737271143756463}
   rightThrustParticles: {fileID: 7088688523083621513}

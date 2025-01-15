@@ -53,7 +53,7 @@ public class ScoreManager : MonoBehaviour
         visitedScenes.Add(currentSceneIndex);
 
         // Find ScoreUploader in the scene
-        uploader = FindObjectOfType<ScoreUploader>();
+        uploader = GameObject.FindAnyObjectByType<ScoreUploader>();
         if (uploader == null)
         {
             Debug.LogWarning("ScoreUploader is not found in the scene. Score uploading will not work.");
