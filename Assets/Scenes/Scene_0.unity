@@ -2379,11 +2379,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -91.49974
+      value: -91.4992
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 91.49975
+      value: 91.49921
       objectReference: {fileID: 0}
     - target: {fileID: 8600642053931010767, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3330,6 +3330,7 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 1559073941}
   - {fileID: 1867432203}
+  - {fileID: 995985394}
   - {fileID: 13107573869204610}
   - {fileID: 4554339080384276856}
   - {fileID: 9175452364790515992}
@@ -3339,4 +3340,3 @@ SceneRoots:
   - {fileID: 1407887680769787246}
   - {fileID: 4307019203276035601}
   - {fileID: 1043449376082950163}
-  - {fileID: 995985394}

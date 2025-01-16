@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class APIClient
 {
-    public const string API_BASE_URL = "https://localhost:7233/api"; 
+    public const string API_BASE_URL = "https://jiashan.fr/boost-rocket/api"; 
 
     public static async Task<UserResponse> Login(string username, string password)
     {
