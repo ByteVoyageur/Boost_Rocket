@@ -71,7 +71,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (!visitedScenes.Contains(nextSceneIndex))
         {
-            AddScore(100);
+            //AddScore(100);
             visitedScenes.Add(nextSceneIndex);
         }
     }

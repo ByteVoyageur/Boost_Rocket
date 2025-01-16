@@ -12,73 +12,69 @@ public class UserAuthUI : MonoBehaviour
     private void Start()
     {
         Debug.Log($"[UserAuthUI] PlayerSession.IsLoggedIn: {PlayerSession.IsLoggedIn}");
-
-        // Check if user is already logged in
-        if (PlayerSession.IsLoggedIn)
-        {
-            loginPanel.SetActive(false);
-        }
-        else
-        {
-            loginPanel.SetActive(true);
-        }
+        loginPanel.SetActive(!PlayerSession.IsLoggedIn);
     }
 
     public async void OnRegisterButtonClicked()
     {
-        string inputUsername = usernameField.text;
-        string inputPassword = passwordField.text;
-
-        if (string.IsNullOrEmpty(inputUsername) || string.IsNullOrEmpty(inputPassword))
-        {
-            ShowFeedback("Username and password cannot be empty");
+        if (!ValidateInput(out string inputUsername, out string inputPassword))
             return;
-        }
 
         try
         {
             var response = await APIClient.Register(inputUsername, inputPassword);
+            Debug.Log($"Registration successful - Id: {response.Id}, Username: {response.Username}");
             PlayerSession.SetLoggedIn(response.Id, response.Username);
             loginPanel.SetActive(false);
         }
         catch (Exception ex)
         {
-            ShowFeedback(ex.Message);
+            ShowFeedback($"Registration failed: {ex.Message}");
         }
     }
 
     public async void OnLoginButtonClicked()
     {
-        string inputUsername = usernameField.text;
-        string inputPassword = passwordField.text;
-
-        if (string.IsNullOrEmpty(inputUsername) || string.IsNullOrEmpty(inputPassword))
-        {
-            ShowFeedback("Username and password cannot be empty");
+        if (!ValidateInput(out string inputUsername, out string inputPassword))
             return;
-        }
 
         try
         {
             var response = await APIClient.Login(inputUsername, inputPassword);
+            Debug.Log($"Login successful - Id: {response.Id}, Username: {response.Username}");
             PlayerSession.SetLoggedIn(response.Id, response.Username);
             loginPanel.SetActive(false);
         }
         catch (Exception ex)
         {
-            ShowFeedback(ex.Message);
+            ShowFeedback($"Login failed: {ex.Message}");
         }
+    }
+
+    private bool ValidateInput(out string username, out string password)
+    {
+        username = usernameField.text.Trim();
+        password = passwordField.text;
+
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            ShowFeedback("Username and password cannot be empty");
+            return false;
+        }
+        return true;
     }
 
     public void OnSkipButtonClicked()
     {
         PlayerSession.SetLoggedOut();
         loginPanel.SetActive(false);
+        Debug.Log("Skipped login, using device ID");
     }
 
     private void ShowFeedback(string message)
     {
         feedbackText.text = message;
         feedbackText.gameObject.SetActive(true);
+        Debug.Log($"Auth feedback: {message}");
     }
 }

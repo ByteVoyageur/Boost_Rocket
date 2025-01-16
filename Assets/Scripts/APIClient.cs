@@ -92,13 +92,13 @@ public class APIClient
         return JsonUtility.FromJson<T>(json);
     }
 
-    public static async Task<bool> UploadScore(string playerId, int score)
+    public static async Task<bool> UploadScore(string playerId, int scoreValue, string username)
     {
         var scoreData = new ScoreUploadRequest
         {
-            PlayerID = playerId,
-            Value = score,
-            Username = PlayerSession.CurrentUsername  
+            PlayerId = playerId,
+            ScoreValue = scoreValue,
+            Username = username  
         };
 
         using (var request = CreateJsonRequest($"{API_BASE_URL}/score", scoreData))
@@ -124,7 +124,7 @@ public class APIClient
     }
 
     public static async Task<List<LeaderBoardData>> GetLeaderboard(
-    string sortBy = "score",
+    string sortBy = "ScoreValue",
     string sortOrder = "desc",
     int limit = 10,
     string currentUserId = null)
@@ -185,8 +185,8 @@ public class UserResponse
 [Serializable]
 public class ScoreUploadRequest
 {
-    public string PlayerID;
-    public int Value;
+    public string PlayerId;
+    public int ScoreValue;
     public string Username;  
 }
 
@@ -195,6 +195,6 @@ public class ScoreResponse
 {
     public string Id;
     public string PlayerId;
-    public int Score;
+    public int ScoreValue;
     public DateTime Timestamp;
 }

@@ -1,15 +1,15 @@
 using System;
 
-[System.Serializable]
+[Serializable]
 public class LeaderBoardData
 {
-    public string userId;
-    public string username;
-    public int score;
-    public DateTime timestamp;
+    public string UserId;        
+    public string Username;      
+    public int ScoreValue;       
+    public DateTime Timestamp;   
 }
 
-[System.Serializable]
+[Serializable]
 public class LeaderBoardResponse
 {
     public LeaderBoardData[] items;  

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.Threading.Tasks;
 
@@ -33,28 +33,20 @@ public class ScoreUploader : MonoBehaviour
     /// <summary>
     /// UploadScore is used to update or insert player's score through the API
     /// </summary>
-    public async void UploadScore(int currentScore)
+    // 在 ScoreUploader.cs 的 UploadScore 方法中
+    public async void UploadScore(int scoreValue)
     {
         try
         {
-            // Decide which ID to use
-            string playerId;
-            if (PlayerSession.IsLoggedIn)
-            {
-                // If the user logged in, use their user ID
-                playerId = PlayerSession.CurrentUserId;
-            }
-            else
-            {
-                // If the user skipped, use device ID
-                playerId = SystemInfo.deviceUniqueIdentifier;
-            }
+            string playerId = PlayerSession.GetActivePlayerId();
+            string username = PlayerSession.GetActiveUsername();
 
-            bool success = await APIClient.UploadScore(playerId, currentScore);
+            Debug.Log($"Uploading score - PlayerId: {playerId}, Username: {username}, Score: {scoreValue}");
 
+            bool success = await APIClient.UploadScore(playerId, scoreValue, username);
             if (success)
             {
-                Debug.Log($"Successfully uploaded score: playerId={playerId}, score={currentScore}");
+                Debug.Log($"Score upload successful");
             }
             else
             {
@@ -67,21 +59,37 @@ public class ScoreUploader : MonoBehaviour
         }
     }
 
-    private async void UploadScoreWithRetry(int currentScore, int maxRetries = 3)
+    /// <summary>
+    /// Retries uploading score in case of failure
+    /// </summary>
+    private async Task RetryUploadScore(int scoreValue, int maxRetries = 3)
     {
-        for (int i = 0; i < maxRetries; i++)
+        for (int i = 1; i <= maxRetries; i++)
         {
             try
             {
-                await Task.Delay(i * 1000); 
-                UploadScore(currentScore);
-                return;
+                await Task.Delay(i * 1000);
+
+                string playerId = PlayerSession.GetActivePlayerId();
+                string username = PlayerSession.GetActiveUsername();
+
+                bool success = await APIClient.UploadScore(
+                    playerId,
+                    scoreValue,
+                    username
+                );
+
+                if (success)
+                {
+                    Debug.Log($"Successfully uploaded score on retry attempt {i}");
+                    return;
+                }
             }
             catch (Exception ex)
             {
-                if (i == maxRetries - 1)
+                if (i == maxRetries)
                 {
-                    Debug.LogError($"Failed to upload score after {maxRetries} attempts: {ex.Message}");
+                    Debug.LogError($"Failed to upload score after {maxRetries} retry attempts: {ex.Message}");
                 }
             }
         }

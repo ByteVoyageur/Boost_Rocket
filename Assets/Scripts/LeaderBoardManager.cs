@@ -17,7 +17,7 @@ public class LeaderBoardManager : MonoBehaviour
 
     private string currentPlayerID = "";
     private bool isPanelVisible = false;
-    private string currentSortBy = "score";
+    private string currentSortBy = "ScoreValue";
     private string currentSortOrder = "desc";
 
     void Start()
@@ -101,10 +101,10 @@ public class LeaderBoardManager : MonoBehaviour
 
         if (textFields.Length >= 3)
         {
-            string displayUsername = TrimUsername(data.username);
+            string displayUsername = TrimUsername(data.Username);
             textFields[0].text = displayUsername;
-            textFields[1].text = data.score.ToString();
-            textFields[2].text = data.timestamp.ToLocalTime().ToString("dd/MM/yyyy");
+            textFields[1].text = data.ScoreValue.ToString();
+            textFields[2].text = data.Timestamp.ToLocalTime().ToString("dd/MM/yyyy");
 
             HighlightCurrentUser(entryGO, data);
         }
@@ -121,7 +121,7 @@ public class LeaderBoardManager : MonoBehaviour
 
     private void HighlightCurrentUser(GameObject entryGO, LeaderBoardData data)
     {
-        if (data.userId == currentPlayerID)
+        if (data.UserId == currentPlayerID)
         {
             Image backgroundImage = entryGO.GetComponent<Image>();
             if (backgroundImage != null)
@@ -140,7 +140,7 @@ public class LeaderBoardManager : MonoBehaviour
 
     private void OnSortByChanged(int index)
     {
-        currentSortBy = index == 0 ? "score" : "timestamp";
+        currentSortBy = index == 0 ? "ScoreValue" : "Timestamp";
         RefreshLeaderBoard();
     }
 
