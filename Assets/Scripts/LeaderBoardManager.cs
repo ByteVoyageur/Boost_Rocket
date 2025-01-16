@@ -18,7 +18,7 @@ public class LeaderBoardManager : MonoBehaviour
 
     private string currentPlayerID = "";
     private bool isPanelVisible = false;
-    private string currentSortBy = "ScoreValue";
+    private string currentSortBy = "scorevalue";
     private string currentSortOrder = "desc";
 
     void Start()
@@ -105,7 +105,7 @@ public class LeaderBoardManager : MonoBehaviour
             string displayUsername = TrimUsername(data.username);
             textFields[0].text = displayUsername;
             textFields[1].text = data.score.ToString();
-            textFields[2].text = data.timestamp.ToLocalTime().ToString("dd/MM/yyyy");
+            textFields[2].text = data.timestamp.ToString("yyyy-MM-dd");
 
             HighlightCurrentUser(entryGO, data);
         }
@@ -127,14 +127,14 @@ public class LeaderBoardManager : MonoBehaviour
             Image backgroundImage = entryGO.GetComponent<Image>();
             if (backgroundImage != null)
             {
-                backgroundImage.color = new Color(1f, 1f, 0f, 0.2f);
+                backgroundImage.color = new Color(1f, 0.92f, 0f, 0.3f);  
             }
 
             TextMeshProUGUI[] textFields = entryGO.GetComponentsInChildren<TextMeshProUGUI>();
             foreach (var text in textFields)
             {
-                text.color = Color.yellow;
-                text.fontStyle = FontStyles.Bold;
+                text.color = new Color(1f, 0.8f, 0f, 1f);  
+                text.fontStyle = FontStyles.Bold | FontStyles.Underline;  
             }
         }
     }

@@ -132,7 +132,7 @@ public class APIClient
     {
         try
         {
-            string url = $"{API_BASE_URL}/leaderboard?sortBy={sortBy}&sortOrder={sortOrder}&limit={limit}&currentUserId={currentUserId}";
+            string url = $"{API_BASE_URL}/leaderboard?sortBy={sortBy.ToLower()}&sortOrder={sortOrder.ToLower()}&limit={limit}&currentUserId={currentUserId}";
 
             using (var request = UnityWebRequest.Get(url))
             {
