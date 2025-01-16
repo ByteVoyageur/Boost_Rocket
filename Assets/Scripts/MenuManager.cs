@@ -4,75 +4,50 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [Header("Menu References")]
-    public GameObject menuPanel;         
-    public Button exitGameButton;
+    public GameObject menuPanel;
     public Button playAgainButton;
     public Button leaderBoardButton;
     public Button closeButton;
-
-    private bool isGamePaused = false;
-
-
+    public GameObject leaderBoardContainer;
 
     void Start()
     {
-        // Hide the menu panel at start
-        if (menuPanel != null)
-        {
-            menuPanel.SetActive(false);
-        }
+        menuPanel?.SetActive(false);
 
-        // Bind buttons
-        if (exitGameButton != null)
-            exitGameButton.onClick.AddListener(OnExitGameClicked);
-
-        if (playAgainButton != null)
-            playAgainButton.onClick.AddListener(OnPlayAgainClicked);
-
-        if (closeButton != null)
-            closeButton.onClick.AddListener(OnCloseMenuClicked);
+        BindButton(playAgainButton, OnPlayAgainClicked);
+        BindButton(closeButton, OnCloseMenuClicked);
+        BindButton(leaderBoardButton, OnLeaderBoardClicked);
     }
 
-    /// <summary>
-    /// Called by the on-screen "Menu" button to open the menu panel.
-    /// </summary>
+    private void BindButton(Button button, UnityEngine.Events.UnityAction action)
+    {
+        if (button != null)
+        {
+            button.onClick.AddListener(action);
+        }
+    }
+
     public void OpenMenu()
     {
-        isGamePaused = true;
-        Time.timeScale = 0f; // Pause the game
+        //Time.timeScale = 0f;
         menuPanel.SetActive(true);
     }
 
-    /// <summary>
-    /// Called when user clicks "Close" button to resume the game.
-    /// </summary>
     private void OnCloseMenuClicked()
     {
-        isGamePaused = false;
-        Time.timeScale = 1f; // Unpause the game
+        //Time.timeScale = 1f;
         menuPanel.SetActive(false);
+        leaderBoardContainer?.SetActive(false);
     }
 
-    /// <summary>
-    /// Called when user clicks "Play Again" button to reload the first scene.
-    /// </summary>
     private void OnPlayAgainClicked()
     {
-        // Unpause before changing scene
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         SceneManager.LoadScene("Scene_0");
     }
 
-    /// <summary>
-    /// Called when user clicks "Exit Game" button.
-    /// </summary>
-    private void OnExitGameClicked()
+    private void OnLeaderBoardClicked()
     {
-        // In Desktop platforms, it will quit
-        Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        leaderBoardContainer?.SetActive(true);
     }
 }

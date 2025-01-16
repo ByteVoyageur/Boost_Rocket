@@ -10,7 +10,6 @@ public class ScoreManager : MonoBehaviour
 
     private int currentScore;
     private string playerID = string.Empty;
-
     [SerializeField] private TextMeshProUGUI scoreText;
 
     // Use a HashSet to track visited scenes
@@ -18,6 +17,9 @@ public class ScoreManager : MonoBehaviour
 
     // Reference to ScoreUploader
     private ScoreUploader uploader;
+
+    private float startTime;
+    private bool isTimerRunning;
 
     private void Awake()
     {
@@ -35,16 +37,23 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        // Get or create player ID
-        playerID = PlayerIDManager.GetOrCreatePlayerID();
-        Debug.Log("Current player ID: " + playerID);
+        // Use the same ID logic as ScoreUploader
+        if (PlayerSession.IsLoggedIn)
+        {
+            playerID = PlayerSession.CurrentUserId.ToString();
+        }
+        else
+        {
+            playerID = SystemInfo.deviceUniqueIdentifier;
+        }
+        Debug.Log($"ScoreManager using playerID: {playerID}");
 
         // Add current scene index to visited set
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         visitedScenes.Add(currentSceneIndex);
 
         // Find ScoreUploader in the scene
-        uploader = FindObjectOfType<ScoreUploader>();
+        uploader = GameObject.FindAnyObjectByType<ScoreUploader>();
         if (uploader == null)
         {
             Debug.LogWarning("ScoreUploader is not found in the scene. Score uploading will not work.");
@@ -62,7 +71,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (!visitedScenes.Contains(nextSceneIndex))
         {
-            AddScore(100);
+            //AddScore(100);
             visitedScenes.Add(nextSceneIndex);
         }
     }
@@ -79,7 +88,7 @@ public class ScoreManager : MonoBehaviour
         // Upload to MongoDB Atlas if uploader is available
         if (uploader != null)
         {
-            uploader.UploadScore(playerID, currentScore);
+            uploader.UploadScore(currentScore);
         }
     }
 
@@ -94,10 +103,66 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public string GetCurrentPlayerID()
+    public void ResetScore()
     {
-        return playerID;
+        currentScore = 0;
+        UpdateScoreText();
+        Debug.Log("Score has been reset to 0.");
     }
 
 
+    /// <summary>
+    /// Returns the current player's ID - either ObjectId for logged in users
+    /// or device ID for non-logged in users
+    /// </summary>
+    public string GetCurrentPlayerID()
+    {
+        // Double check the current status and update if needed
+        if (PlayerSession.IsLoggedIn && PlayerSession.CurrentUserId != null)
+        {
+            playerID = PlayerSession.CurrentUserId.ToString();
+        }
+        else if (string.IsNullOrEmpty(playerID))
+        {
+            playerID = SystemInfo.deviceUniqueIdentifier;
+        }
+
+        return playerID;
+    }
+
+    /// <summary>
+    /// StartTimer initializes the startTime and begins timing.
+    /// </summary>
+    public void StartTimer()
+    {
+        startTime = Time.time;
+        isTimerRunning = true;
+        Debug.Log("Timer started.");
+    }
+
+    /// <summary>
+    /// StopTimerAndAddScore stops the timer, calculates time-based score, and adds it to total score.
+    /// </summary>
+    public void StopTimerAndAddScore()
+    {
+        if (!isTimerRunning) return;
+
+        float endTime = Time.time;
+        float deltaTime = endTime - startTime;
+        isTimerRunning = false;
+
+        int timeScore = Mathf.Max(0, 1000 - Mathf.RoundToInt(deltaTime * 10));
+        Debug.Log($"Time-based score = {timeScore}, deltaTime = {deltaTime}");
+        AddScore(timeScore);
+    }
+
+    /// <summary>
+    /// ResetTimer can be called when the player crashes or you need to discard current timing.
+    /// </summary>
+    public void ResetTimer()
+    {
+        isTimerRunning = false;
+        startTime = 0f;
+        Debug.Log("Timer reset.");
+    }
 }

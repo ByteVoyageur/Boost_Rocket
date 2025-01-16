@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e3b7726b9b15e004d9a2062367c2d224
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 179534
+  packageName: Better Buttons for Character Movement | Android & IOS
+  packageVersion: 1.0
+  assetPath: Assets/BetterButtonsForMobile/Scripts/TimedClickButton.cs
+  uploadId: 392292

@@ -1,112 +1,169 @@
+﻿// Unity LeaderBoardManager.cs
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using System.Threading.Tasks;
+using System;
 
 public class LeaderBoardManager : MonoBehaviour
 {
-    [Header("Leaderboard UI")]
-    public GameObject leaderBoardPanel;  // The parent panel or container for the leaderboard
+    [Header("UI References")]
+    public GameObject leaderBoardPanel;
+    public GameObject entryPrefab;
+    public Transform contentParent;
 
-    [Header("Top 10 Ranks (fixed)")]
-    public TextMeshProUGUI[] rankTexts;  // Array of size 10, each referencing Rank01 ~ Rank10
+    [Header("Sorting Controls")]
+    public TMP_Dropdown sortByDropdown;  
+    public Button sortOrderButton;        
 
-    // Reference to ScoreFetcher
-    public ScoreFetcher scoreFetcher;
-
-    // For identifying current player
     private string currentPlayerID = "";
-
-    // Internal state
     private bool isPanelVisible = false;
+    private string currentSortBy = "scorevalue";
+    private string currentSortOrder = "desc";
 
     void Start()
     {
-        // Hide leaderboard panel at start (optional)
-        if (leaderBoardPanel != null)
+        leaderBoardPanel.SetActive(false);
+
+        if (PlayerSession.IsLoggedIn)
         {
-            leaderBoardPanel.SetActive(false);
+            currentPlayerID = PlayerSession.CurrentUserId;
+        }
+        else
+        {
+            currentPlayerID = SystemInfo.deviceUniqueIdentifier;
         }
 
-        // If you have a ScoreFetcher in the scene or via Inspector
-        if (scoreFetcher == null)
+        SetupSortingControls();
+
+        Debug.Log($"LeaderBoard initialized with currentPlayerID: {currentPlayerID}");
+    }
+
+    private void SetupSortingControls()
+    {
+        if (sortByDropdown != null)
         {
-            scoreFetcher = FindObjectOfType<ScoreFetcher>();
-            if (scoreFetcher == null)
-            {
-                Debug.LogWarning("ScoreFetcher not found in the scene. LeaderBoardManager cannot retrieve scores.");
-            }
+            sortByDropdown.onValueChanged.AddListener(OnSortByChanged);
         }
 
-        // Get current player ID from ScoreManager if needed
-        if (ScoreManager.Instance != null)
+        if (sortOrderButton != null)
         {
-            // Suppose you have a method GetCurrentPlayerID() or PlayerID property
-            currentPlayerID = ScoreManager.Instance.GetCurrentPlayerID();
+            sortOrderButton.onClick.AddListener(OnSortOrderChanged);
         }
     }
 
-    /// <summary>
-    /// Called when user wants to toggle the leaderboard panel on/off (e.g. via a button).
-    /// </summary>
     public void ToggleLeaderBoard()
     {
         if (!isPanelVisible)
         {
             RefreshLeaderBoard();
-            if (leaderBoardPanel != null)
-                leaderBoardPanel.SetActive(true);
-
+            leaderBoardPanel.SetActive(true);
             isPanelVisible = true;
         }
         else
         {
-            if (leaderBoardPanel != null)
-                leaderBoardPanel.SetActive(false);
-
+            leaderBoardPanel.SetActive(false);
             isPanelVisible = false;
         }
     }
 
-    /// <summary>
-    /// Pull top 10 from database and display in the rankTexts array.
-    /// </summary>
     private async void RefreshLeaderBoard()
     {
-        if (scoreFetcher == null)
+        foreach (Transform child in contentParent)
         {
-            Debug.LogWarning("No ScoreFetcher available. Cannot retrieve top scores.");
-            return;
+            Destroy(child.gameObject);
         }
 
-        // 1) Get top 10 from DB
-        List<LeaderBoardData> topScores = await scoreFetcher.GetTopScores(10, currentPlayerID);
-
-        // 2) Loop through rankTexts to fill them
-        for (int i = 0; i < rankTexts.Length; i++)
+        if (PlayerSession.IsLoggedIn)
         {
-            if (i < topScores.Count)
-            {
-                // i-th data
-                LeaderBoardData data = topScores[i];
-                rankTexts[i].text = $"{i + 1}. {data.username}  {data.score}";
+            currentPlayerID = PlayerSession.CurrentUserId;
+        }
 
-                // Highlight if current player
-                if (data.userId == currentPlayerID)
-                    rankTexts[i].color = Color.yellow;
-                else
-                    rankTexts[i].color = Color.white;
+        try
+        {
+            string url = $"{APIClient.API_BASE_URL}/leaderboard?sortBy={currentSortBy}&sortOrder={currentSortOrder}&limit=10&currentUserId={currentPlayerID}";
+            var leaderboardData = await APIClient.GetLeaderboard(currentSortBy, currentSortOrder, 10, currentPlayerID);
+
+            foreach (var data in leaderboardData)
+            {
+                CreateLeaderboardEntry(data);
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to refresh leaderboard: {ex.Message}");
+        }
+    }
+
+    private void CreateLeaderboardEntry(LeaderBoardData data)
+    {
+        GameObject entryGO = Instantiate(entryPrefab, contentParent);
+        TextMeshProUGUI[] textFields = entryGO.GetComponentsInChildren<TextMeshProUGUI>();
+
+        if (textFields.Length >= 3)
+        {
+            string displayUsername = TrimUsername(data.username);
+            textFields[0].text = displayUsername;
+            textFields[1].text = data.score.ToString();
+            if (DateTime.TryParse(data.timestamp, out DateTime parsedTime))
+            {
+                textFields[2].text = parsedTime.ToString("dd-MM-yyyy");
             }
             else
             {
-                // If no more data, show placeholder or blank
-                rankTexts[i].text = $"---";
-                rankTexts[i].color = Color.white;
+                textFields[2].text = "N/A"; 
+            }
+
+            HighlightCurrentUser(entryGO, data);
+        }
+    }
+
+    private string TrimUsername(string username, int maxLength = 12)
+    {
+        if (string.IsNullOrEmpty(username))
+            return "Anonymous";
+
+        return username.Length > maxLength ?
+            username.Substring(0, maxLength - 3) + "..." : username;
+    }
+
+    private void HighlightCurrentUser(GameObject entryGO, LeaderBoardData data)
+    {
+        if (data.userId == currentPlayerID)
+        {
+            Image backgroundImage = entryGO.GetComponent<Image>();
+            if (backgroundImage != null)
+            {
+                backgroundImage.color = new Color(1f, 0.92f, 0f, 0.3f);  
+            }
+
+            TextMeshProUGUI[] textFields = entryGO.GetComponentsInChildren<TextMeshProUGUI>();
+            foreach (var text in textFields)
+            {
+                text.color = new Color(1f, 0.8f, 0f, 1f);  
+                text.fontStyle = FontStyles.Bold | FontStyles.Underline;  
             }
         }
     }
 
-    /// <summary>
-    /// Called when "Exit Game" button is clicked.
-    /// </summary>
+    private void OnSortByChanged(int index)
+    {
+        currentSortBy = index == 0 ? "ScoreValue" : "Timestamp";
+        RefreshLeaderBoard();
+    }
+
+    private void OnSortOrderChanged()
+    {
+        currentSortOrder = currentSortOrder == "desc" ? "asc" : "desc";
+        RefreshLeaderBoard();
+    }
+
+    public void ForceRefresh()
+    {
+        if (isPanelVisible)
+        {
+            RefreshLeaderBoard();
+        }
+    }
 }
