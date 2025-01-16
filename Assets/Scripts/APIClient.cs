@@ -1,3 +1,4 @@
+// Unity: APIClient.cs
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
@@ -178,8 +179,8 @@ public class RegisterRequest
 [Serializable]
 public class UserResponse
 {
-    public string Id;
-    public string Username;
+    public string id;
+    public string username;
 }
 
 [Serializable]

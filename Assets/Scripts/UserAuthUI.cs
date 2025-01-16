@@ -1,3 +1,4 @@
+// Unity: UserAuthUI.cs:
 using UnityEngine;
 using TMPro;
 using System;
@@ -12,8 +13,18 @@ public class UserAuthUI : MonoBehaviour
     private void Start()
     {
         Debug.Log($"[UserAuthUI] PlayerSession.IsLoggedIn: {PlayerSession.IsLoggedIn}");
-        loginPanel.SetActive(!PlayerSession.IsLoggedIn);
+        Debug.Log($"[UserAuthUI] PlayerSession.HasSkippedLogin: {PlayerSession.HasSkippedLogin}");
+
+        if (PlayerSession.IsLoggedIn || PlayerSession.HasSkippedLogin)
+        {
+            loginPanel.SetActive(false);
+        }
+        else
+        {
+            loginPanel.SetActive(true);
+        }
     }
+
 
     public async void OnRegisterButtonClicked()
     {
@@ -23,8 +34,8 @@ public class UserAuthUI : MonoBehaviour
         try
         {
             var response = await APIClient.Register(inputUsername, inputPassword);
-            Debug.Log($"Registration successful - Id: {response.Id}, Username: {response.Username}");
-            PlayerSession.SetLoggedIn(response.Id, response.Username);
+            Debug.Log($"Registration successful - Id: {response.id}, Username: {response.username}");
+            PlayerSession.SetLoggedIn(response.id, response.username);
             loginPanel.SetActive(false);
         }
         catch (Exception ex)
@@ -41,8 +52,8 @@ public class UserAuthUI : MonoBehaviour
         try
         {
             var response = await APIClient.Login(inputUsername, inputPassword);
-            Debug.Log($"Login successful - Id: {response.Id}, Username: {response.Username}");
-            PlayerSession.SetLoggedIn(response.Id, response.Username);
+            Debug.Log($"Login successful - Id: {response.id}, Username: {response.username}");
+            PlayerSession.SetLoggedIn(response.id, response.username);
             loginPanel.SetActive(false);
         }
         catch (Exception ex)
@@ -66,7 +77,8 @@ public class UserAuthUI : MonoBehaviour
 
     public void OnSkipButtonClicked()
     {
-        PlayerSession.SetLoggedOut();
+        PlayerSession.SetSkipMode();
+        //PlayerSession.SetLoggedOut();
         loginPanel.SetActive(false);
         Debug.Log("Skipped login, using device ID");
     }

@@ -103,6 +103,14 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    public void ResetScore()
+    {
+        currentScore = 0;
+        UpdateScoreText();
+        Debug.Log("Score has been reset to 0.");
+    }
+
+
     /// <summary>
     /// Returns the current player's ID - either ObjectId for logged in users
     /// or device ID for non-logged in users

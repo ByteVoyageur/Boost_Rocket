@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// Unity LeaderBoardManager.cs
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
@@ -101,10 +102,10 @@ public class LeaderBoardManager : MonoBehaviour
 
         if (textFields.Length >= 3)
         {
-            string displayUsername = TrimUsername(data.Username);
+            string displayUsername = TrimUsername(data.username);
             textFields[0].text = displayUsername;
-            textFields[1].text = data.ScoreValue.ToString();
-            textFields[2].text = data.Timestamp.ToLocalTime().ToString("dd/MM/yyyy");
+            textFields[1].text = data.score.ToString();
+            textFields[2].text = data.timestamp.ToLocalTime().ToString("dd/MM/yyyy");
 
             HighlightCurrentUser(entryGO, data);
         }
@@ -121,7 +122,7 @@ public class LeaderBoardManager : MonoBehaviour
 
     private void HighlightCurrentUser(GameObject entryGO, LeaderBoardData data)
     {
-        if (data.UserId == currentPlayerID)
+        if (data.playerId == currentPlayerID)
         {
             Image backgroundImage = entryGO.GetComponent<Image>();
             if (backgroundImage != null)

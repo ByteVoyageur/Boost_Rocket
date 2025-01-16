@@ -29,20 +29,20 @@ public class MenuManager : MonoBehaviour
 
     public void OpenMenu()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         menuPanel.SetActive(true);
     }
 
     private void OnCloseMenuClicked()
     {
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         menuPanel.SetActive(false);
         leaderBoardContainer?.SetActive(false);
     }
 
     private void OnPlayAgainClicked()
     {
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         SceneManager.LoadScene("Scene_0");
     }
 

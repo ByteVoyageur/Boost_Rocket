@@ -3,10 +3,10 @@ using System;
 [Serializable]
 public class LeaderBoardData
 {
-    public string UserId;        
-    public string Username;      
-    public int ScoreValue;       
-    public DateTime Timestamp;   
+    public string playerId;        
+    public string username;      
+    public int score;       
+    public DateTime timestamp;   
 }
 
 [Serializable]
