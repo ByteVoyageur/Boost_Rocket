@@ -7,8 +7,8 @@
       "RelativeMoniker": "D:0:0:{D073DA11-F86D-3559-566F-67D04AA9F540}|PlayModeTests.csproj|solutionrelative:assets\\tests\\playmodetests\\gameplaytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\leaderboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|solutionrelative:assets\\scripts\\leaderboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|solutionrelative:assets\\scripts\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\scoreuploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,8 +19,8 @@
       "RelativeMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|solutionrelative:assets\\scripts\\movement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|solutionrelative:assets\\scripts\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\leaderboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|solutionrelative:assets\\scripts\\leaderboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6DDA4058-E3E6-4A6E-DCBB-D96C35C2D807}|GameScripts.csproj|C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\assets\\scripts\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -76,22 +76,10 @@
               "RelativeDocumentMoniker": "Assets\\Tests\\PlayModeTests\\GameplayTests.cs",
               "ToolTip": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Tests\\PlayModeTests\\GameplayTests.cs",
               "RelativeToolTip": "Assets\\Tests\\PlayModeTests\\GameplayTests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-21T08:25:29.536Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PlayerSessionTests.cs",
-              "DocumentMoniker": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Tests\\EditModeTests\\PlayerSessionTests.cs",
-              "RelativeDocumentMoniker": "Assets\\Tests\\EditModeTests\\PlayerSessionTests.cs",
-              "ToolTip": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Tests\\EditModeTests\\PlayerSessionTests.cs",
-              "RelativeToolTip": "Assets\\Tests\\EditModeTests\\PlayerSessionTests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T15:49:14.244Z"
             },
             {
               "$type": "Document",
@@ -107,19 +95,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "ScoreManager.cs",
               "DocumentMoniker": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\ScoreManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ScoreManager.cs",
               "ToolTip": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\ScoreManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\ScoreManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-14T11:10:00.83Z"
+              "WhenOpened": "2025-01-14T11:10:00.83Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "LeaderBoardManager.cs",
               "DocumentMoniker": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\LeaderBoardManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\LeaderBoardManager.cs",
@@ -149,9 +138,10 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Movement.cs",
               "ToolTip": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\Movement.cs",
               "RelativeToolTip": "Assets\\Scripts\\Movement.cs",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAwwLMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAAALIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T14:06:49.732Z"
+              "WhenOpened": "2025-01-12T14:06:49.732Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -161,9 +151,22 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\ScoreUploader.cs",
               "ToolTip": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Scripts\\ScoreUploader.cs",
               "RelativeToolTip": "Assets\\Scripts\\ScoreUploader.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAUwGEAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAGAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T16:55:50.508Z"
+              "WhenOpened": "2024-12-26T16:55:50.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerSessionTests.cs",
+              "DocumentMoniker": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Tests\\EditModeTests\\PlayerSessionTests.cs",
+              "RelativeDocumentMoniker": "Assets\\Tests\\EditModeTests\\PlayerSessionTests.cs",
+              "ToolTip": "C:\\Users\\xs\\Projets_Unity\\Boost_Rocket\\Assets\\Tests\\EditModeTests\\PlayerSessionTests.cs",
+              "RelativeToolTip": "Assets\\Tests\\EditModeTests\\PlayerSessionTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T15:49:14.244Z"
             },
             {
               "$type": "Document",
