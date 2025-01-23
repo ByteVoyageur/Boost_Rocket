@@ -34,7 +34,6 @@ public class ScoreUploader : MonoBehaviour
     /// <summary>
     /// UploadScore is used to update or insert player's score through the API
     /// </summary>
-    // 在 ScoreUploader.cs 的 UploadScore 方法中
     public async void UploadScore(int scoreValue)
     {
         try
