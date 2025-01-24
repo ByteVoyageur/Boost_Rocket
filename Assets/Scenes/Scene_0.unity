@@ -2373,6 +2373,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3778971594816063826, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778971594816063826, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778971594816063826, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 4306578469818443490, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2515,11 +2527,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -91.49997
+      value: -91.49964
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 91.500015
+      value: 91.499695
       objectReference: {fileID: 0}
     - target: {fileID: 8600642053931010767, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2586,6 +2598,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -25
       objectReference: {fileID: 0}
+    - target: {fileID: 2251145083710672973, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: m_fontSize
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251145083710672973, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3466824509313028901, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
       propertyPath: loginPanel
       value: 
@@ -2601,6 +2621,18 @@ PrefabInstance:
     - target: {fileID: 5526493336299757930, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
       propertyPath: m_Name
       value: MenuManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584033813226074631, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584033813226074631, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584033813226074631, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 5878933185663325565, guid: 6a35fbf740939134a8a3704ea7db7650, type: 3}
       propertyPath: onHoldClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2685,6 +2717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusText: {fileID: 1985619781}
   retryInterval: 5
+  successMessageDuration: 5
 --- !u!1001 &2096418852822227187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2753,6 +2786,18 @@ PrefabInstance:
     - target: {fileID: 181490216398002413, guid: c42469222e0d2e94999dab56cc1cece9, type: 3}
       propertyPath: m_Name
       value: ScoreManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207891979449718869, guid: c42469222e0d2e94999dab56cc1cece9, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207891979449718869, guid: c42469222e0d2e94999dab56cc1cece9, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207891979449718869, guid: c42469222e0d2e94999dab56cc1cece9, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 7593758580012116717, guid: c42469222e0d2e94999dab56cc1cece9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2933,6 +2978,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 691302134434720006, guid: 5e812ca245d11e547b003a77aaed9862, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 691302134434720006, guid: 5e812ca245d11e547b003a77aaed9862, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 691302134434720006, guid: 5e812ca245d11e547b003a77aaed9862, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 2070328444447303012, guid: 5e812ca245d11e547b003a77aaed9862, type: 3}
       propertyPath: m_Name
       value: UserManager

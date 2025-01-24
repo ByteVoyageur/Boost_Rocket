@@ -12,7 +12,7 @@ public class ScoreUploader : MonoBehaviour
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<ScoreUploader>();
+                instance = UnityEngine.Object.FindFirstObjectByType<ScoreUploader>();
             }
             return instance;
         }
