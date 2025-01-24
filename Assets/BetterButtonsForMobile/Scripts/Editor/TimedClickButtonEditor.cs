@@ -15,7 +15,7 @@ namespace BetterButtonsEditor
             GameObject go = new GameObject("Timed Click Button");
             Selection.activeGameObject = go;
             var rectTransform = go.AddComponent<RectTransform>();
-            var canvas = FindObjectOfType<Canvas>();
+            var canvas = UnityEngine.Object.FindAnyObjectByType<Canvas>();
             if (canvas != null)
             {
                 rectTransform.parent = canvas.transform;
@@ -87,7 +87,7 @@ namespace BetterButtonsEditor
             GameObject go = new GameObject("Timed Click Button");
             Selection.activeGameObject = go;
             var rectTransform = go.AddComponent<RectTransform>();
-            var canvas = FindObjectOfType<Canvas>();
+            var canvas = UnityEngine.Object.FindAnyObjectByType<Canvas>();
             if (canvas != null)
             {
                 rectTransform.parent = canvas.transform;
