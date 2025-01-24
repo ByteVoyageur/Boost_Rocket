@@ -2371,7 +2371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3437996281588601319, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.8975296
       objectReference: {fileID: 0}
     - target: {fileID: 4306578469818443490, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2515,11 +2515,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -91.49997
+      value: -91.49999
       objectReference: {fileID: 0}
     - target: {fileID: 8044211044913646224, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 91.500015
+      value: 91.49998
       objectReference: {fileID: 0}
     - target: {fileID: 8600642053931010767, guid: 02a2a81767340bd4a9bf7c9260df83bc, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2685,6 +2685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusText: {fileID: 1985619781}
   retryInterval: 5
+  successMessageDuration: 5
 --- !u!1001 &2096418852822227187
 PrefabInstance:
   m_ObjectHideFlags: 0
